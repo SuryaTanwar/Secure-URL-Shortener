@@ -11,7 +11,9 @@ npm install
 ```
 
 Change the directory and go into the backend folder.
-create a .env file and add the following lines with their value:
+create .env file in the root of backend and frontend and add the following lines with their value:
+
+Backend
 ```
 PORT=
 JWT_SECRET=
@@ -19,6 +21,11 @@ JWT_EXPIRY=
 GMAIL_PASS=
 GMAIL_EMAIL=
 MONGO_URL=
+```
+Frontend
+```
+VITE_BACKEND_HOST=
+VITE_FRONTEND_HOST=
 ```
 
 Turn up your MongoDB server.

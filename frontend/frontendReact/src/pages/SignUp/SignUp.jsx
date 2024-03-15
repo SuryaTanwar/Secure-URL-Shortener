@@ -19,7 +19,8 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/signup', {
+      const host = import.meta.env.VITE_BACKEND_HOST;
+      const response = await axios.post(`${host}/api/v1/signup`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,

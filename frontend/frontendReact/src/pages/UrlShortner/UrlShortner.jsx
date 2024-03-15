@@ -22,7 +22,8 @@ function UrlShortner() {
     e.preventDefault();
     const token = Cookies.get('jwt');
     try {
-        const response = await axios.post('http://localhost:3000/api/v1/shorten', {
+      const host = import.meta.env.VITE_BACKEND_HOST;
+      const response = await axios.post(`${host}/api/v1/shorten`, {
       userName: formData.name,
       userEmail: formData.email,
       longUrl: formData.originalurl,
@@ -76,7 +77,7 @@ function UrlShortner() {
       </form>
       {newShortUrl && <div>
         <span>Your short URL is: </span>
-        <span>{`localhost:5173/api/v1/myurl/${newShortUrl}`}</span>
+        <span>{`${import.meta.env.VITE_FRONTEND_HOST}/api/v1/myurl/${newShortUrl}`}</span>
       </div>}
     </div>
   );
