@@ -1,5 +1,5 @@
 const { ShortenRepository } = require('../repository');
-const generateRandomShortUrl = require('./shortenidgenerator');
+const  { shortenIdGenerator } = require('./shortenidgenerator');
 const { JWT_SECRET, JWT_EXPIRY, GMAIL_EMAIL} = require('../config/server-config');
 const jwt = require('jsonwebtoken');
 const mailsender = require('../config/email-config');
@@ -8,21 +8,12 @@ class ShortenService {
         this.shortenRepository = new ShortenRepository();
     }
 
-    //to create a new shorten url 
     async shortenUrl(data) {
-        
         try {
-            
-            while (true) {
-                const shortenId = await generateRandomShortUrl();
-                const shortenUrl = await this.shortenRepository.find(shortenId);
-                if (shortenUrl.length === 0) {
-                    data.shortenId = shortenId;
-                    const shortenUrl = await this.shortenRepository.create(data);
-                    return shortenUrl;
-                }
-                
-            }
+            const shortenId = shortenIdGenerator();
+            data.shortenId = shortenId;
+            const shortenUrl = await this.shortenRepository.create(data);
+            return shortenUrl;
         } catch (error) {
             throw error;
         }
